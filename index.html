@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Git & GitHub Visual Tutorial</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background: #24292e;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-weight: 700;
+    }
+    nav {
+      background: #0366d6;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1rem;
+      padding: 0.7rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      transition: background 0.3s;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    nav a:hover,
+    nav a.active {
+      background: #024ea2;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
+    section {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    }
+    section h2 {
+      margin-top: 0;
+      color: #0366d6;
+    }
+    .command {
+      background: #f6f8fa;
+      border: 1px solid #d1d5da;
+      border-radius: 6px;
+      padding: 1rem;
+      font-family: 'Source Code Pro', monospace, monospace;
+      font-size: 1rem;
+      margin: 1rem 0;
+      white-space: pre-wrap;
+      user-select: all;
+    }
+    .explanation {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #444;
+    }
+    .try-button {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .try-button:hover {
+      background: #218838;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    /* Scroll smooth */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Git & GitHub Visual Tutorial</h1>
+  <p>Learn essential Git & GitHub commands step by step</p>
+</header>
+
+<nav>
+  <a href="#step1" class="active">Install Git</a>
+  <a href="#step2">Initialize Repo</a>
+  <a href="#step3">Basic Workflow</a>
+  <a href="#step4">Branching & Merging</a>
+  <a href="#step5">Push & Pull</a>
+  <a href="#step6">Collaboration</a>
+  <a href="#step7">Undo Changes</a>
+  <a href="#step8">Remote Branches</a>
+  <a href="#step9">Rebasing</a>
+  <a href="#step10">Stashing</a>
+  <a href="#step11">Merge Conflicts</a>
+  <a href="#step12">Tags & Releases</a>
+  <a href="#step13">GitHub Actions</a>
+</nav>
+
+<main>
+
+  <section id="step1">
+    <h2>Step 1: Install Git</h2>
+    <div class="explanation">
+      Git is a version control system used to track changes in your code.<br>
+      Download and install Git on your machine:
+    </div>
+    <div class="command">
+      # Windows: <br>
+      Download from <a href="https://git-scm.com/download/win" target="_blank">git-scm.com/download/win</a><br><br>
+      # Mac (using Homebrew): <br>
+      brew install git<br><br>
+      # Linux (Debian/Ubuntu): <br>
+      sudo apt install git
+    </div>
+  </section>
+
+  <section id="step2">
+    <h2>Step 2: Initialize a Git Repository</h2>
+    <div class="explanation">
+      Create a new project folder and initialize it as a Git repository:
+    </div>
+    <div class="command">
+      mkdir my-project<br>
+      cd my-project<br>
+      git init
+    </div>
+    <div class="explanation">
+      This creates a hidden <code>.git</code> folder that tracks your changes.
+    </div>
+  </section>
+
+  <section id="step3">
+    <h2>Step 3: Basic Git Workflow</h2>
+    <div class="explanation">
+      The typical Git workflow involves these commands:
+    </div>
+    <div class="command">
+      git status     # Check file changes<br>
+      git add .      # Stage all changes<br>
+      git commit -m "Your message"   # Commit changes
+    </div>
+    <div class="explanation">
+      - <code>git status</code> shows files that are modified.<br>
+      - <code>git add</code> stages files for commit.<br>
+      - <code>git commit</code> saves the staged snapshot with a message.
+    </div>
+  </section>
+
+  <section id="step4">
+    <h2>Step 4: Branching and Merging</h2>
+    <div class="explanation">
+      Branches allow you to work on features separately without affecting main code.
+    </div>
+    <div class="command">
+      git branch feature-1       # Create a new branch<br>
+      git checkout feature-1     # Switch to branch<br>
+      git merge feature-1        # Merge branch into current branch
+    </div>
+    <div class="explanation">
+      Always merge your feature branch back into <code>main</code> when done.
+    </div>
+  </section>
+
+  <section id="step5">
+    <h2>Step 5: Connect to GitHub and Push Changes</h2>
+    <div class="explanation">
+      Link your local repo to GitHub and upload your commits:
+    </div>
+    <div class="command">
+      git remote add origin https://github.com/your-username/repo.git<br>
+      git branch -M main<br>
+      git push -u origin main
+    </div>
+    <div class="explanation">
+      - <code>git remote add</code> connects your repo.<br>
+      - <code>git push</code> uploads commits to GitHub.
+    </div>
+  </section>
+
+  <section id="step6">
+    <h2>Step 6: Collaborate Using Fork & Pull Requests</h2>
+    <div class="explanation">
+      1. Fork a repo on GitHub.<br>
+      2. Clone your fork locally.<br>
+      3. Create a feature branch, make changes, commit, and push.<br>
+      4. Open a Pull Request to merge changes upstream.
+    </div>
+    <div class="command">
+      git clone https://github.com/your-username/forked-repo.git<br>
+      git checkout -b feature-branch<br>
+      git push origin feature-branch
+    </div>
+  </section>
+
+  <section id="step7">
+    <h2>Step 7: Undo Changes</h2>
+    <div class="explanation">
+      Sometimes you want to undo changes locally or remove files from staging:
+    </div>
+    <div class="command">
+      git checkout -- file.txt           # Discard changes in working directory<br>
+      git reset HEAD file.txt            # Unstage a file<br>
+      git reset --hard HEAD              # Reset working directory and index to last commit
+    </div>
+    <div class="explanation">
+      Use <code>--hard</code> reset carefully as it deletes local changes.
+    </div>
+  </section>
+
+  <section id="step8">
+    <h2>Step 8: Working with Remote Branches</h2>
+    <div class="explanation">
+      Fetch and track branches from remotes:
+    </div>
+    <div class="command">
+      git fetch origin                  # Fetch latest changes from remote<br>
+      git checkout -b feature origin/feature  # Create local branch tracking remote branch<br>
+      git pull                         # Pull latest changes into current branch
+    </div>
+  </section>
+
+  <section id="step9">
+    <h2>Step 9: Rebasing Basics</h2>
+    <div class="explanation">
+      Rebasing moves your commits on top of another base tip:
+    </div>
+    <div class="command">
+      git checkout feature<br>
+      git rebase main
+    </div>
+    <div class="explanation">
+      This creates a cleaner linear history by replaying your changes onto <code>main</code>.
+    </div>
+  </section>
+
+  <section id="step10">
+    <h2>Step 10: Stashing Changes</h2>
+    <div class="explanation">
+      Save unfinished changes temporarily to work on something else:
+    </div>
+    <div class="command">
+      git stash             # Save changes<br>
+      git stash list        # List stashed changes<br>
+      git stash apply       # Reapply changes
+    </div>
+  </section>
+
+  <section id="step11">
+    <h2>Step 11: Resolving Merge Conflicts</h2>
+    <div class="explanation">
+      If two branches modify the same lines, Git stops and asks you to fix conflicts:
+    </div>
+    <div class="command">
+      # Open conflicting files and edit<br>
+      git add conflicted-file<br>
+      git commit
+    </div>
+    <div class="explanation">
+      Use your editor or tools like VS Code’s merge conflict UI for easier resolution.
+    </div>
+  </section>
+
+  <section id="step12">
+    <h2>Step 12: Tags and Releases</h2>
+    <div class="explanation">
+      Mark important points (like v1.0) in history with tags:
+    </div>
+    <div class="command">
+      git tag v1.0<br>
+      git push origin v1.0
+    </div>
+    <div class="explanation">
+      Tags can be used for release versions.
+    </div>
+  </section>
+
+  <section id="step13">
+    <h2>Step 13: Introduction to GitHub Actions</h2>
+    <div class="explanation">
+      Automate workflows like testing and deployment with GitHub Actions:<br>
+      Create a file <code>.github/workflows/main.yml</code> in your repo:
+    </div>
+    <div class="command">
+      name: CI<br>
+      on: [push]<br>
+      jobs:<br>
+      &nbsp;&nbsp;build:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;steps:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;- uses: actions/checkout@v2<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;- name: Run tests<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: echo "Add your test commands here"
+    </div>
+    <div class="explanation">
+      This runs tests automatically on every push.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Made with ❤️ by Asfar Hossain Sitab
+</footer>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 80;
+      if(pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if(link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

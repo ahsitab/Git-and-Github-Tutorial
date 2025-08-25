@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Git Branch Concept</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 2rem;
+      background: #1e1e1e;
+      color: #c5c8c6;
+    }
+    .branch-diagram {
+      white-space: pre;
+      background: #2d2d2d;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .explanation {
+      max-width: 600px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Git Branch Concept</h1>
+
+<div class="branch-diagram" id="diagram">
+main
+  |
+  |--- A --- B --- C
+</div>
+
+<button onclick="createBranch()">Create Branch</button>
+<button onclick="makeCommit()">Commit on Branch</button>
+<button onclick="switchBranch()">Switch Branch</button>
+<button onclick="mergeBranch()">Merge Branch</button>
+
+<div class="explanation" id="explanation">
+You are on the <strong>main</strong> branch with commits A, B, and C.
+</div>
+
+<script>
+  let onMain = true;
+  let commitsMain = ['A', 'B', 'C'];
+  let commitsFeature = [];
+  let featureCreated = false;
+
+  const diagramEl = document.getElementById('diagram');
+  const explanationEl = document.getElementById('explanation');
+
+  function renderDiagram() {
+    if (!featureCreated) {
+      diagramEl.textContent = 
+`main
+  |
+  |--- ${commitsMain.join(' --- ')}`;
+      explanationEl.innerHTML = `You are on the <strong>main</strong> branch with commits ${commitsMain.join(', ')}.`;
+    } else if (onMain) {
+      diagramEl.textContent = 
+`main
+  |
+  |--- ${commitsMain.join(' --- ')}
+   \\
+    \\--- ${commitsFeature.join(' --- ') || '(no commits yet)'}`;
+      explanationEl.innerHTML = `You are on the <strong>main</strong> branch.<br>Feature branch exists with commits: ${commitsFeature.join(', ') || '(none)'}`;
+    } else {
+      diagramEl.textContent = 
+`main
+  |
+  |--- ${commitsMain.join(' --- ')}
+   \\
+    \\--- ${commitsFeature.join(' --- ')}`;
+      explanationEl.innerHTML = `You are on the <strong>feature</strong> branch with commits: ${commitsFeature.join(', ') || '(none)'}`;
+    }
+  }
+
+  function createBranch() {
+    if (featureCreated) {
+      alert('Feature branch already created!');
+      return;
+    }
+    featureCreated = true;
+    commitsFeature = [];
+    onMain = true;
+    renderDiagram();
+  }
+
+  function makeCommit() {
+    if (!featureCreated) {
+      // commit on main
+      commitsMain.push(String.fromCharCode(commitsMain[commitsMain.length-1].charCodeAt(0) + 1));
+      renderDiagram();
+      return;
+    }
+    if (onMain) {
+      commitsMain.push(String.fromCharCode(commitsMain[commitsMain.length-1].charCodeAt(0) + 1));
+    } else {
+      commitsFeature.push(commitsFeature.length ? 
+        String.fromCharCode(commitsFeature[commitsFeature.length-1].charCodeAt(0) + 1) : 'D');
+    }
+    renderDiagram();
+  }
+
+  function switchBranch() {
+    if (!featureCreated) {
+      alert('Create feature branch first!');
+      return;
+    }
+    onMain = !onMain;
+    renderDiagram();
+  }
+
+  function mergeBranch() {
+    if (!featureCreated) {
+      alert('No branch to merge!');
+      return;
+    }
+    // merge feature commits into main
+    commitsMain = commitsMain.concat(commitsFeature);
+    commitsFeature = [];
+    featureCreated = false;
+    onMain = true;
+    renderDiagram();
+    alert('Feature branch merged into main!');
+  }
+
+  renderDiagram();
+</script>
+
+</body>
+</html>
