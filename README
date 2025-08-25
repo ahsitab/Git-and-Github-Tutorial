@@ -1,0 +1,26 @@
+# 🚀 Git & GitHub Tutorial
+
+Welcome! This tutorial is your step-by-step guide to understanding how to use **Git** for version control and **GitHub** for collaboration and hosting code.
+
+---
+
+## 📌 What’s the Difference?
+
+| Git          | GitHub                     |
+|--------------|----------------------------|
+| Local tool   | Cloud platform             |
+| Tracks code history | Hosts repositories online |
+| Works offline | Needs internet            |
+| CLI-based    | Web-based UI + CLI support |
+
+---
+
+## 🛠️ Installing Git
+
+- **Windows**: [Download Git](https://git-scm.com/download/win)
+- **Mac**: Use Homebrew → `brew install git`
+- **Linux**: Use apt → `sudo apt install git`
+
+Verify installation:
+```bash
+git --version
